@@ -1,8 +1,8 @@
-# Why are lettered-step prompts less rule-adherent?
+# How representations affect rule adherence in Vison-language model: A mech-interp walkthrough
 
 A vision-language model (Qwen3-VL-8B-Instruct) reads a traffic-sign photo and applies a decision tree given in the
 prompt. Four ways of writing the same tree reach the same accuracy, but lettered steps ("Step A … go to Step E")
-break their own rules 2–6× more often. The notebook traces this into the model's internals.
+lags behind the others on rule adherence. The notebook traces this into the model's internals.
 - Most off-tree answers are shape jumps: a late retrieval of a content name from the other shape's rule lines.
 - A single attention head (L28H0) flags these answers in every format.
 - The outline format anchors the right list through its parent line; the step format's pointer route goes unused.
@@ -40,5 +40,3 @@ rules. Orders `o1`/`o2` list the rules in two different orders.
   22 classes. The photos themselves are not redistributed beyond the few shown in the notebook.
 - **Interpretability runs:** batch 1, teacher-forced on each logged answer, plain `transformers` hooks. The GPU
   pipeline that produced `data/runs/instruct-h3-interp/` is not part of this repo.
-# Prompt-Structure-Adherence
-# Prompt-Structure-Adherence
